@@ -49,7 +49,7 @@ module.exports = function(grunt) {
     copy: {
       dist: {
         files: [
-          {src: 'dist/trixel.js', dest: 'test/js/'},
+          {expand: true, cwd: 'dist/', src: 'trixel.js', dest: 'test/js/'},
           {expand: true, cwd: 'test/', src: '**', dest: '../site/'}
         ],
       },
