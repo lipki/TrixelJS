@@ -1,0 +1,40 @@
+body {
+  overflow: hidden;
+}
+
+#output {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 100%;
+  width: 100%;
+}
+
+#input {
+  position: absolute;
+  left: 2rem;
+  height: 19rem;
+  width: 26rem;
+  top: 2rem;
+}
+
+#editor {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
+.ace_gutter {
+  display: none;
+}
+
+.ace-tm {
+  background-color: transparent !important;
+}
+
+.ace_scroller {
+  background: rgba(255, 255, 255, 0.698) !important;
+}

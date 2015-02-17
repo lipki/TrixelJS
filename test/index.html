@@ -1,0 +1,95 @@
+<!doctype html>
+<html>
+    <head>
+        <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+        <title>Trixel JS</title>
+        <link rel="stylesheet" href="css/style.css">
+        <link rel="shortcut icon" href="img/favicon.ico">
+    </head>
+    <body>
+        <div id="content">
+          <div id="output">
+            <canvas id="canvas"></canvas>
+          </div>
+          <div id="input">
+            <div id="editor">
+
+//init
+
+var options = {
+    paving: Trixel.ISO,
+    style: Iso.HORIZONTAL, // Iso.VERTICAL
+    strate: '1%'
+}
+var canvas = document.getElementById("canvas");
+
+var tri = new Trixel(canvas, options);
+
+// coloration
+
+tri.colorMap(Trixel.HPLAN);
+tri.colorMap(Trixel.RAND, {
+    colors:[
+        new Color(141, 130, 40),
+        new Color(142, 134, 43),
+        new Color(143, 135, 45),
+        new Color(144, 140, 42)
+    ],
+    add: Trixel.FUSION
+});
+//tri.colorMap(Trixel.IMG, {src:'img/roche.jpg'});
+//tri.colorMap(Trixel.IMG, {src:'img/trixeljs.png'});
+//tri.colorMap(Trixel.IMG, {src:'img/paysage.jpg'});
+tri.colorMap(Trixel.IMG, {src:'img/trixeljs.png'});
+
+// one trixel
+
+var yellow = new Color(255, 255, 0);
+
+var point = {
+    x: Math.floor(tri.matrix.sizeX/2),
+    y: Math.floor(tri.matrix.sizeY/2),
+}
+
+tri.setIxel( point, yellow );
+tri.setIxel( {x:point.x-1,y:point.y+1}, yellow );
+tri.setIxel( {x:point.x+1,y:point.y+1}, yellow );
+
+            </div>
+          </div>
+        </div>
+        <script src="js/trixel.js"></script>
+        <script src="js/ace.js"></script>
+        <script src="js/noise.js"></script>
+        <script src="js/loop-protect.js"></script>
+        <script src="js/script.js"></script>
+        <script>
+            var editor = ace.edit("editor");
+            editor.setTheme("ace/theme/twilight");
+            editor.getSession().setMode("ace/mode/javascript");
+            editor.getSession().setUseWorker(false);
+                
+            document.addEventListener("DOMContentLoaded", function () {
+                
+                var container = document.getElementById("output");
+                var canvas = document.getElementById("canvas");
+                
+                var width = container.offsetWidth;
+                var height = container.offsetHeight;
+                
+                canvas.style.width = width + "px";
+                canvas.style.height = height + "px";
+                
+                canvas.width = 2*width;
+                canvas.height = 2*height;
+                
+                var scratch = new Scratchpad(editor, canvas);
+                scratch.load();
+                
+                scratch.run();
+                
+                editor.gotoLine(editor.session.getLength());
+            });
+        </script>
+    </body>
+</html>
